@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>{$out.title}</title>
+<link rel='icon' href='http://pms.anzhi.com/favicon.ico' type='image/x-icon' />
+<link rel='shortcut icon' href='http://pms.anzhi.com/favicon.ico' type='image/x-icon' />
+<link rel="stylesheet" type="text/css" href="__STATIC__/Admin/public/login2/normalize.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/Admin/public/login2/demo.css" />
+
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/Admin/public/login2/component.css" />
+<!--[if IE]>
+<script src="js/html5.js"></script>
+<![endif]-->
+
+<!-- element 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- element 基础文件 -->
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<!-- element 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<style type="text/css">
+/*
+<!-- 对整个表单的设置 -->
+<form autocomplete="off">
+<!-- 单独对某个组件设置 -->
+<input type="text" autocomplete="off">
+  *   */
+/* 谷歌自带样式填充  */
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,input:-webkit-autofill:active {
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+</style>
+</head>
+<body>
+<div class="container demo-1">
+	<div class="content">
+		<div id="large-header" class="large-header">
+			<canvas id="demo-canvas"></canvas>
+			<div class="logo_box">
+				<h3>欢迎你</h3>
+				<form action="{$Think.__APP__}Login/login" name="f" method="post" id='form'>
+				<div class="input_outer">
+						<span class="u_user"></span>
+						<input value='{$logname}' name="logname" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+				</div>
+				<div class="input_outer">
+					<span class="us_uer"></span>
+					<input value='123456' id='pwd' name="logpass" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;"value="" type="password" placeholder="请输入密码">
+					{:token()}
+				</div>
+				<!-- 验证码  -->
+				{if @$code eq 'on' }
+				<div class="input_outer">
+					<span class="u_code"></span>
+					<img class="code_img" alt="验证码" title="换一张"  src="{$Think.__APP__}/UserCenter/getImg" id="img11" onclick="document.getElementById('img11').src='{$Think.__APP__}/UserCenter/getImg/'+Math.random()" />
+					<input name="code" class="code_text" style="color: #FFFFFF !important" type="text" placeholder="请输入验证码">
+				</div>
+				{/if}
+				<!-- 问题答案  -->
+				{if @$wenti eq 'on' }
+				<div class="input_outer">
+					<span class="u_code"></span>
+					<select class="code_wenti" name="wenti" >
+						<option value='0'>选择您的问题</option>
+						<option value='1'>喜欢的球队?</option>
+						<option value='2'>喜欢的明星?</option>
+						<option value='3'>喜欢的名著?</option>
+						<option value='4'>喜欢的名人?</option>
+					</select>
+					<input name="daan" class="code_text" style="color: #FFFFFF !important" type="text" placeholder="请输入登录口令">
+				</div>
+				{/if}
+				<div class="mb2"><a class="act-but submit" href="javascript:;"  onclick='doSubmitForm()' style="color: #FFFFFF">登录</a></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div><!-- /container -->
+<script src="__STATIC__/Admin/public/login2/TweenLite.min.js"></script>
+<script src="__STATIC__/Admin/public/login2/EasePack.min.js"></script>
+<script src="__STATIC__/Admin/public/login2/rAF.js"></script>
+<script src="__STATIC__/Admin/public/login2/demo-1.js"></script>
+<script src="__STATIC__/js/md5/md5.js"></script>
+</body>
+<script type="text/javascript">
+function doSubmitForm(){
+	var form = document.getElementById('form');
+	//再次修改input内容
+	var pwd= document.getElementById('pwd');
+  		pwd.value=  hex_md5(pwd.value); 
+	form.submit()
+}
+
+
+var Main = {
+	    methods: {
+	    	notify_error() {
+	        this.$notify.error({
+	          title: '登录信息错误',
+	          message: '{$message}'?'{$message}':'未知错误联系管理员'
+	        });
+	      }
+	    }
+	  }
+var Ctor = Vue.extend(Main);
+
+window.onload=function(){ 
+	var messag =  '{$message}'?'{$message}':'';
+	if(messag!=''){
+		new Ctor().notify_error();		
+	}
+}
+</script>
+	
+</html>

@@ -1,0 +1,650 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+<style>
+body{
+	background: url(/tp5_blog/public/static/Index/images/body_bg.png) repeat #f8f9f3;
+    color: #000000;
+	background-color: rgba(42,76,0,0.08);
+	    position: relative;
+}
+
+
+
+header{
+	float:right;
+}
+#sidebar {
+    float: left;
+	width:156px;
+	//margin-top: 0px; 
+}
+#content{
+	//float:right;
+	float: left;
+}
+#container {
+    padding-top: 38px;
+    background: url(images/nav-bg1.gif) repeat-y 680px 0;
+}
+#container{
+	//text-align: right;
+}
+a.logo {
+    display: block;
+    margin: 22px 0 10px 440px;
+    width: 150px;
+}
+header h3{
+	margin: 0 0 0 460px;
+}
+#right-col {
+    margin-top: 0px;
+}
+#left-col .widget {
+    //margin-left: 20px;
+}
+
+
+/***************************************************************************/
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans");
+@import url("http://fonts.googleapis.com/css?family=Roboto:400,700");
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#daohang{
+	background-color: ghostwhite;
+    //line-height: 25px;
+    border-radius: 5px;
+	width: 95%;
+    margin: auto;
+	margin-left: 30px;
+	height: 32px;
+	border-top: 1px solid #ddd;
+  	border-bottom: 1px solid #ddd;
+  	background-color: #f5f5f5;
+}
+
+#daohang ul {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  list-style: none;
+  height: 100%;
+}
+
+#daohang li {
+  float: left;
+  width: 18%;
+  //margin-right: 1%;
+  height: 100%;
+}
+#daohang li:last-child{
+	width: 64%;
+}
+#daohang li:last-child a{
+	text-align: left;
+    margin-left: 6%;
+}
+
+#daohang:before, #daohang:after {
+  content: ' ';
+  display: table;
+}
+#daohang:after {
+  clear: both;
+}
+
+#daohang li:last-child a:before,
+#daohang li:last-child a:after {
+  display: none;
+}
+
+#daohang a {
+  position: relative;
+  display: block;
+  //padding: 20px;
+  padding-right: 0 !important;
+  /* important overrides media queries */
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  color: #aaa;
+  cursor: pointer;
+  height: 100%;
+}
+
+#daohang a:before,
+#daohang a:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 1;
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 12px solid transparent;
+}
+
+#daohang a:before {
+  margin-left: 1px;
+  border-left-color: #d5d5d5;
+}
+
+#daohang a:after {
+  border-left-color: #f5f5f5;
+}
+
+#daohang a.active {
+  color: #777;
+  background-color: #eee;
+}
+
+#daohang a.active:after {
+  border-left-color: #eee;
+}
+
+
+#daohang a span{
+	height: 100%;
+	//width: 32px;
+}
+
+#daohang a span:first-child {
+  display: inline-block;
+  //width: 22px;
+  //height: 22px;
+  padding: 5px;
+  margin-right: 5px;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+#daohang a.active span:first-child {
+  color: #fff;
+  border-color: #777;
+  background-color: #777;
+}
+
+
+
+/* 滑动事件  */
+#daohang a:hover:after {
+  border-left-color: antiquewhite;
+  
+}
+#daohang a.active:hover {
+  background-color: antiquewhite;
+}
+
+#daohang li:hover{
+	background-color: antiquewhite;
+}
+
+
+@media (max-width: 720px) {
+  #daohang a {
+    padding: 15px;
+  }
+
+  #daohang a:before,
+  #daohang a:after {
+    border-top-width: 26px;
+    border-bottom-width: 26px;
+    border-left-width: 13px;
+  }
+}
+
+
+</style>
+	<div id="container" class="clearfix">
+		<div class="main-content">
+			<div id="content">
+				<section id='daohang'>
+				    <ul>
+				      <li>
+				        <a>
+				          <span>1</span>
+				          <span>Home</span>
+				        </a>
+				      </li>
+				      <li>
+				        <a class='active'>
+				          <span>2</span>
+				          <span>php</span>
+				        </a>
+				      </li>
+				      <li>
+				        <a>
+				          <span>3</span>
+				          <span id='page_content'>{$content.title}</span>
+				        </a>
+				      </li>
+				    </ul>
+				</section>
+				<section class="indexbody">				
+					<article id='content_body'>
+					
+						<section class="post" id="Log_{$content.id}" date='{$content.title}'>
+							<h2>
+								<a href="" title="{$content.title}" target="_blank">{$content.title}</a>
+							</h2>
+
+							<section class="info">
+								<span>{$content.atime}</span>
+								<span class="category">
+									发表于:<a href="" title="" rel="category tag">网页设计&amp; 灵感</a>
+								</span> 
+									<a href="" class="comments-link" title="《{$content.title}》上的评论">评论</a>
+							</section>
+								{$content.content}
+						</section>
+						
+						
+					</article>
+					
+				<style>
+				 .clearfix{
+	
+				 }	
+				#page-single {
+				    //padding: 5px 0 20px 35px;
+					font-size: 18px;
+				}
+				#page-single a{
+					text-decoration: underline;
+					color: blue;
+				}
+				#page-single span{
+					text-decoration: line-through;
+					color: #00000038;
+				}
+				.pageTab {
+					background-color:#3bb3e0;
+					padding:10px;
+					position:relative;
+					font-family: 'Open Sans', sans-serif;
+					font-size:12px;
+					text-decoration:none;
+					color:#fff;
+					border: solid 1px #186f8f;
+					background-image: linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+					background-image: -o-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+					background-image: -moz-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+					background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+					background-image: -ms-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
+					background-image: -webkit-gradient(linear,left bottom,left top,
+					color-stop(0, rgb(44,160,202)),
+					color-stop(1, rgb(62,184,229))
+					);
+					-webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+					-moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+					box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					-o-border-radius: 5px;
+					border-radius: 5px;
+				}
+
+				.pageTab::before {
+					background-color:#ccd0d5;
+					content:"";
+					display:block;
+					position:absolute;
+					width:100%;
+					height:100%;
+					padding:8px;
+					left:-8px;
+					top:-8px;
+					z-index:-1;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					-o-border-radius: 5px;
+					border-radius: 5px;
+					-webkit-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					-moz-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					-o-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					box-sizing: unset;
+				}
+
+				.pageTab:active {
+					padding-bottom:9px;
+					padding-left:10px;
+					padding-right:10px;
+					padding-top:11px;
+					top:1px;
+					background-image: linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -o-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -moz-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -ms-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -webkit-gradient(
+					linear,left bottom,left top,
+					color-stop(0, rgb(62,184,229)),
+					color-stop(1, rgb(44,160,202))
+					);
+				}	
+
+				.pageTab_colss {
+				        background-color: #a9a9a9f2;
+					    padding: 10px;
+					    position: relative;
+					    font-family: 'Open Sans', sans-serif;
+					    font-size: 12px;
+					    text-decoration: none;
+					    color: #fff;
+					    border: solid 1px #a9a9a9f2;
+					    -webkit-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+					    -moz-box-shadow: inset 0px 1px 0px #7fd2f1, 0px 1px 0px #fff;
+					    box-shadow: inset 0px 1px 0px #a9a9a9f2, 0px 1px 0px #fff;
+					    -webkit-border-radius: 5px;
+					    -moz-border-radius: 5px;
+					    -o-border-radius: 5px;
+					    border-radius: 5px;
+				}
+				
+				.pageTab_colss::before {
+					background-color:#ccd0d5;
+					content:"";
+					display:block;
+					position:absolute;
+					width:100%;
+					height:100%;
+					padding:8px;
+					left:-8px;
+					top:-8px;
+					z-index:-1;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					-o-border-radius: 5px;
+					border-radius: 5px;
+					-webkit-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					-moz-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					-o-box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					box-shadow: inset 0px 1px 1px #909193, 0px 1px 0px #fff;
+					box-sizing: unset;
+				}
+
+				.pageTab_colss:active {
+					padding-bottom:9px;
+					padding-left:10px;
+					padding-right:10px;
+					padding-top:11px;
+					top:1px;
+					background-image: linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -o-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -moz-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -webkit-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -ms-linear-gradient(bottom, rgb(62,184,229) 0%, rgb(44,160,202) 100%);
+					background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, rgb(62,184,229)),color-stop(1, rgb(44,160,202)));
+				}	
+				</style>
+					<div id="page-single" class="clearfix">
+						<div class="pre-page-single">
+							<div id='pageTab_left' class='pageTab' title='{$pages.0.title}' date='{$pages.0.id}' >{$pages.0.title}</div>
+						</div>
+						<div class="next-page-single">
+							<div id='pageTab_right' class='pageTab' title='{$pages.0.title2}' date='{$pages.0.id2}' >{$pages.0.title2}</div>
+						</div>
+					</div>
+					
+				</section>
+			</div>
+			
+			
+			<div id="right-col"></div>
+			
+			<!-- end main-content -->
+
+		</div>
+		<!-- end #container -->
+
+	</div>
+
+<!-- <link type="text/css" rel="stylesheet" href="http://m.test.anzhi.com/static/booking/css/common.css"> -->	
+
+
+
+
+{//include file="/public/pub_paomaden" /}
+ 
+
+<script type="text/javascript">
+const log = console.log;
+function opne_height(my,obj){
+	$(my).hide();
+	$(obj).show();
+}
+var bool = true;
+$(function(){
+	content_ini();
+});
+
+//初始化
+function content_ini(){
+	var obj = ['#pageTab_left','#pageTab_right'];
+
+	if($(obj[0]).attr('date') == 0){
+		$(obj[0]).attr('class','pageTab_colss')
+	} 
+	
+	if($(obj[1]).attr('date') == 0){
+		$(obj[1]).attr('class','pageTab_colss')
+	}
+	
+	$(obj[0]).bind('click',function(){
+		show_content(null,this)
+	});
+	$(obj[1]).bind('click',function(){
+		show_content(1,this);
+	});
+}
+
+function Get_Last_id(){
+	var last_id = '';
+	$('.post').each(function(i){
+		//1.函数：split() 功能：使用一个指定的分隔符把一个字符串分割存储到数组
+		var display=$(this).css('display');
+		if(display=='block'){
+			last_id = this.id.split('_')[1]; //选择当前展示的id
+    	}
+		$(this).hide();
+	})
+	return last_id;
+}
+var Show_list = new Array();
+function show_content(type=null,obj){
+	if($(obj).attr('date') == 0 )  return;
+	var len = ($('.post').length) - 1;
+	var list =  new Array();
+	var list1 =  new Array();
+	var title = new Array();
+	var last_id = 0;
+	var block='';
+	var num = 0;
+	var haha = false;
+	$('.post').each(function(i){
+		var display=$(this).css('display');
+		if(display=='block'){
+			block = this.id;
+			num = i;
+			last_id = this.id.split('_')[1]; //选择当前展示的id
+			Show_list[this.id+"_lf"] = $('#pageTab_left').html();
+			Show_list[this.id+"_rt"] = $('#pageTab_right').html();
+			
+			Show_list[this.id+"_ld"] = $('#pageTab_left').attr('date');
+			Show_list[this.id+"_rd"] = $('#pageTab_right').attr('date');
+    	}
+		list1[this.id]	= this.id;
+		title[this.id] = $(this).attr('date');
+		list.push(this.id);
+		$(this).hide();
+	})
+	
+	//log(title);
+	//log(block);//上一个的展示
+	var show_id = '';
+	var daohang ='';
+	switch(type){
+	case null://向上
+		if(list[num-1]){
+			for(var j = 0,len = list.length; j < len; j++){
+				
+			}
+			$('#'+list[num-1]).show();
+			show_id = list[num-1];
+			daohang = $('#'+list[num-1]).attr('date');
+			haha = true;
+		}else{
+			select_content('lt',last_id);
+		}
+		break;
+	case 1://向下
+		if(list[num+1]){
+			$('#'+list[num+1]).show();
+			daohang = $('#'+list[num+1]).attr('date');
+			show_id = list[num+1];
+			haha = true;
+		}else{
+			select_content('gt',last_id);
+		}
+		break;
+	default:
+	 	alert('系统错误');
+	}
+	
+	if(haha){
+		$('#pageTab_left').attr('date',Show_list[show_id+'_ld'])
+	    $('#pageTab_left').attr('title',Show_list[show_id+'_rt'])
+	    $('#pageTab_left').html(Show_list[show_id+'_lf']);
+		
+		$('#pageTab_right').attr('date',Show_list[show_id+'_rd'])
+	    $('#pageTab_right').attr('title',Show_list[show_id+'_rt'])
+	    $('#pageTab_right').html(Show_list[show_id+'_rt']);
+		
+		$("#page_content").html(daohang)//写入导航
+	}
+}
+
+var NOW = new Date();
+var COOKIE_NAME =  '' + NOW.getFullYear() + (NOW.getMonth() + 1) + NOW.getDate() + '_showNum';
+function select_content(type='gt',itemId){
+	//var itemId = Get_Last_id();
+	if(!itemId || itemId=='0'){ set_error_viwe(type);return; } 
+	
+	//获取cookie
+	var cookie_val = cookie.get(COOKIE_NAME);
+	if(!cookie_val || (typeof cookie_val)=='undefined'){
+		cookie_val = '';	
+	}
+
+    $.ajax({ 
+        url:"/tp5_blog/public/index.php/index/log_content2", 
+        type:'POST', 
+        data:{id:itemId,where:type,cookie:cookie_val},
+        dataType:'json', 
+        success:function(json){
+            // 由于是json数据，这里判定是否有数据信息
+            if(typeof json == 'object' && json.code!=500){
+                set_pages(json.pages[0]);//调用换页
+            	var con_id = 'Log_'+json.id;
+                html = "<section class='post' id='"+con_id+"' date='"+json.title+"'><h2><a href='' title='"+json.title+"' target='_blank'>"+json.title+con_id+"</a></h2>";
+                html += "<section class='info'><time>"+json.atime+"</time>";
+                html += "<span class='category'>发表于: <a href='' title='' rel='category tag'>网页设计&amp; 灵感</a></span>.";
+                html += "<a href='' class='comments-link' title='《"+json.title+"》上的评论'>评论</a></section>" +json.content;
+                html +="</section>";   
+                
+                if(type =='gt'){
+                	$("#content_body").append(html);//追加
+                	if(!bool){
+        				bool = true;
+        				//$('#pageTab_right').attr('class','pageTab')
+        			} 
+                	
+                }else{
+                	$("#content_body").prepend(html);//插入
+                	if(!bool){
+        				bool = true;
+        				//$('#pageTab_left').attr('class','pageTab')
+        			} 
+                }
+
+                $("#page_content").html(json.title)//写入导航
+                
+                document.getElementById( con_id ).scrollIntoView();//定位到锚点
+                
+                //写入 cookie 
+                cookie_val = cookie_val +','+json.id;
+                cookie.set(COOKIE_NAME,cookie_val);
+                
+            }else if(json.code==500){
+            	/*  */
+                //set_error_viwe(type);
+            }else{
+            	//set_error_viwe(type,400);
+            }
+        } 
+    }); 
+}
+
+function set_error_viwe(type='gt',code=500){
+	var errid = type + '-ERR404';
+	var errObj = document.getElementById(errid);
+	 
+	if(!errObj && code ==500){
+		html = "<section class='post' id='"+errid+"' date='通信错误 ERR 404' ><h2><a href='' title='' target='_blank'>通信错误 ERR 404</a></h2>";
+		html += "<section class='info'><time></time>";
+		html += "<span class='category'>发表于: <a href='' title='' rel='category tag'>通信错误 ERR 404</a></span>.";
+		html += "<a href='' class='comments-link' title='《通信错误 ERR 404》上的评论'></a></section>通信错误 ERR 404";
+		html +="</section>";
+		if(type =='gt'){
+			$("#content_body").append(html);//追加	
+		}else{
+			$("#content_body").prepend(html);//插入
+		}
+		$("#page_content").html('通信错误')//写入导航	
+	}
+	$('#'+errid).show();
+	/*if(type =='gt'){
+		$("#pageTab_right").unbind("click")	
+    }else{
+    	$("#pageTab_left").unbind("click")
+    }*/
+	document.getElementById( 'content' ).scrollIntoView();//定位到锚点
+}
+
+
+function set_pages(pages){
+	var obj = ['#pageTab_left','#pageTab_right'];
+	
+	$(obj[0]).attr('date',pages.id)
+    //$(obj[0]).attr('title',pages.title)
+    $(obj[0]).html(pages.title);
+	if(!pages.id){
+		bool = false;
+		$(obj[0]).attr('class','pageTab_colss')
+	} 
+	
+	if(!pages.id2){
+		bool = false;
+		$(obj[1]).attr('class','pageTab_colss')
+	} 
+	$(obj[1]).attr('date',pages.id2)
+    //$(obj[1]).attr('title',pages.title2)
+    $(obj[1]).html(pages.title2);
+
+}
+
+</script>
+
+
+
+{//include file="/public/pub_footer" /}

@@ -1,0 +1,138 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+<link rel="stylesheet" href="__STATIC__/treeview//jquery.treeview.css" />
+<link rel="stylesheet" href="__STATIC__/treeview/screen.css" />
+<script src="__STATIC__/treeview/jquery.treeview.js"></script>
+
+<body id='testDiv'>
+
+<div id='list_table'>
+	<p style='color:red;'>小提示 * 鼠标在文件夹上,右键呼出系统菜单</p>
+	<div>
+		<h4><span date='right_span' rel='999999999' onclick="nodeMnue(this,'f9999');" ><img  style='width:20px;' src="__STATIC__/Admin/index/img/trre_home.png" />菜单节点</span></h4>
+		<ul id="browser" class="filetree">
+		  {foreach name="list" item="val" key="k" }
+			<li class="closed"><span class="folder" date='right_span' rel='{$val.id}'  onclick="nodeMnue(this,{$val.id});" >{$val.name}</span>
+				<ul>
+					{if @$val.son}
+						{foreach name="val.son" item="son" key="k1" }
+						<li class="open"><span class="folder" date='right_span' rel='{$son.id}' onclick="nodeMnue(this,{$son.id});" >{$son.name}</span>
+						{if @$son.son}
+							{foreach name="son.son" item="son1" key="k1" }
+							<ul id="folder21">
+								<li><span class="file" date='right_span' rel='{$val.id}' onclick="nodeMnue(this,{$son1.id});" >{$son1.name}</span></li>
+							</ul>
+							{/foreach}
+						{/if}	
+						</li>
+						{/foreach}
+					{/if}
+				</ul>
+			</li>
+		  {/foreach}
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+var config = {};
+config['Rlist'] = {'add_code':'添加节点','del_code':'删除节点','code_qx':'节点权限'}; 
+config['NRlist'] = {'add_code':0,'del_code':1,'code_qx':1}; 
+Mouse.Init(config);
+
+function add_code(id){
+	/*
+	if(typeof D_ifram == "undefined"){ 
+		var script = document.createElement('script');
+		script.src = '__STATIC__\/js\/daylog_ifram.js';
+	    document.body.appendChild(script);
+	}*/
+	D_ifram.load_ini({'url':'add_menu?id='+id});
+	D_ifram.add_ifram_html();
+}
+
+
+function del_code(id){
+	Element_Obj.confirm();
+}
+
+
+/**
+ * 右键菜单添加处理项
+ * add_code(id)
+ */
+/* function add_code(id){
+	var bgid = 'show_table_tab';
+	var bg_div = document.getElementById(bgid);
+	var html = '';
+	var from_url = 'add_menu?id='+id;
+	var from_class = 'iframe_class';
+	if( bg_div == null ){
+		//创建自己的大div元素
+		bg_div = document.createElement('div');
+		bg_div.id = bgid;
+        document.body.appendChild(bg_div);
+	}
+	bg_div.innerHTML= '';
+	
+	html = "<div id='msgDiv'><div id='caozhuo'><span onclick='close_span();'>X</span><span onclick='big_windows(this);'>[]</span></div><div id='msgShut'></div><div id='msgDetail'>";
+    html += '<iframe src="'+ from_url +'" class="'+ from_class +'"></iframe></div></div>';
+	
+    bg_div.innerHTML= html;	
+	
+	var bg_h=$(window).height() + $(document).scrollTop();
+    //bg_h = document.body.scrollHeight || 600;
+	$("#" + bgid).css("height",bg_h+"px").show();
+	window.onresize = function(){
+		$("#" + bgid).css("height",bg_h+"px");
+	}
+}
+
+//关闭弹窗窗口
+function close_span(){
+	$("#show_table_tab").hide();
+}
+//放大窗口
+function big_windows(obj){
+	if($("#msgDiv").css("width") !== '1000px'){
+		$("#msgDiv").css("width","1000px");
+		$("#msgDiv").css("height","500px");
+		$("#msgDiv").css("top","10%").show();
+		$(obj).html('—');
+	}else{
+		$("#msgDiv").css("width","800px");
+		$("#msgDiv").css("height","400px");
+		$("#msgDiv").css("top","20%").show();
+		$(obj).html('[]');
+	}
+	//$("#msgDiv").css("left","40%").show();
+} */
+
+
+function nodeMnue(obj,id){
+	//console.log(obj);
+}
+$(document).ready(function(){
+
+	// first example
+	$("#browser").treeview({
+		persist: "location",
+		collapsed: true,
+		unique: true,
+		ExpandDepth:true
+	});
+	/*
+	// second example
+	$("#navigation").treeview({
+		persist: "location",
+		collapsed: true,
+		unique: true,
+		ExpandDepth:true
+	});*/
+});
+
+
+</script>
+	
+</body>
+</html>

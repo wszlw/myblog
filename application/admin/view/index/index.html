@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>云日记 [管理后台]</title>
+</head>
+<frameset rows="80,*" border="1">
+	<!-- <frame src="__URL__/head" name="topFrame" target="main"  scrolling="no" /> -->
+	<frame src="{$Think.__APP__}index/head" name="head" target="main"  scrolling="no" />
+	<frameset cols="10%,*" rows="1600,*" id="frame">
+		<!-- scrolling="no" 设置是否滑动  -->
+		<frame src="{$Think.__APP__}index/left" name="left" target="main" />
+		<frame src="{$Think.__APP__}index/right" name="main"  target="_self" />
+	</frameset>
+</frameset>
+</html>

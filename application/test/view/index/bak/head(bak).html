@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>blog管理端</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/css/public.css"/>
+<link type="text/css" rel="stylesheet" href="__STATIC__/Index/index/css/head.css"/>
+<link type="text/css" rel="stylesheet" href="__STATIC__/Index/index/css/main.css"/>
+<!-- js -->
+<script src="__STATIC__/js/jquery-1.8.0.min.js"></script>
+
+
+<!-- element 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- element 基础文件 -->
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<!-- element 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<style type="text/css">
+
+.az_mainnav {
+    height: 50px;
+    //overflow: hidden;
+    //background: #fff;
+    //border-top: 1px solid #efefef;
+    //border-bottom: 1px solid #f6f6f6;
+}
+/*
+.az_mainnav li {
+    float: left;
+    width: 16%;
+    height: 50px;
+    line-height: 48px;
+    font-size: 18px;
+    //border-right: 1px solid #f6f6f6;
+    //color: #3e3e3e;
+}*/
+
+.az_mainnav a{
+	color:#FFF;
+}
+
+.az_mainnav > li {
+    display: block;
+	position: relative;
+    float: left;
+	width: 16%;
+    height: 50px;
+    line-height: 48px;
+    font-size: 18px;
+}
+
+//------------
+
+
+</style>
+
+</head>
+<body>
+<div class='head'>
+<div id="app">
+<el-row type="flex" class="row-bg">
+  <el-col :span="3"><div class="grid-content bg-purple"><h1 class='blog_logo'>天天云日记</h1></div></el-col>
+  <el-col :span="16"><div class="grid-content bg-purple-light">
+  	<div>
+ 		<ul class="menu">
+			<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Home</a></li>
+			<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#s1">Menu 1</a>
+				<ul class="submenu">
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu a</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu b</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu c</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu d</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu e</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu f</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu g</a></li>
+					<li><a href="http://www.17sucai.com/preview/146411/2017-01-05/sources364/index.html#">Submenu h</a></li>
+				</ul>
+			</li>
+		</ul>
+  	</div>
+  </div>	
+  </el-col>
+  <el-col :span="5"><div class="grid-content bg-purple"></div><p>2018年06月25日</p></el-col>
+</el-row>
+</div>
+
+<script type="text/javascript">
+new Vue().$mount('#app')
+</script>
+</div>

@@ -1,0 +1,54 @@
+<style>
+/*含有展开菜单的导航链接*/
+.hasUl{
+    position:relative;
+}
+
+/*未展开子菜单*/
+.hasUl>ul{
+    position:absolute;
+    left:0;
+    top:100%;    /*确保不会遮盖到选项，hover鼠标滑动也可衔接至子菜单*/
+    transform-origin: 50% 0;
+    transform:scaleY(0);
+    opacity:0;
+    transition:all .3s;
+}
+
+/*子菜单展开样式*/
+.hasUl:hover>ul,
+.hasUl.hover>ul{
+    transform:scaleY(1);
+    opacity:1;
+}
+
+/*激活选项颜色改变*/
+.hasUl:hover>ul>li:hover,
+.hasUl.hover>ul>li:hover{
+    color:red;
+}
+</style>
+<ul>
+    <li class="hasUl">
+        <p>菜单A</p>
+        <ul>
+            <li>A子菜单1</li>
+            <li>A子菜单2</li>
+        </ul>
+    </li>
+    <li class="hasUl">
+        <p>菜单B</p>
+        <ul>
+            <li>B子菜单1</li>
+            <li>B子菜单2</li>
+        </ul>
+    </li>
+</ul>
+<script>
+document.body.addEventListener('touchstart',function(){});
+var myLinks = document.querySelectorAll('.hasUl');
+for(var i = 0; i < myLinks.length; i++){
+    myLinks[i].addEventListener('touchstart', function(){this.className = "hasUl hover";}, false);
+    myLinks[i].addEventListener('touchend', function(){this.className = "hasUl";}, false);
+}
+</script>

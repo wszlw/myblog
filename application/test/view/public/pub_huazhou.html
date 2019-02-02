@@ -1,0 +1,89 @@
+<style>
+.huazhou{
+	background: url(http://pic.51yuansu.com/pic3/cover/01/33/05/59245984ad367_610.jpg) repeat #f8f9f3;
+	height:400px;
+	background-size: 100% 100%;
+	margin: 0 auto;  
+    line-height: 18px;  
+	word-wrap: break-word; 
+	//letter-spacing: 20px; 
+	padding: 80px 30px 30px 30px;
+	font-size: 16px; 
+}
+.huazhou div{
+	width: 50%;
+	float: right;
+	margin: 0 auto;
+	text-align: center;
+}
+.huazhou p{
+	margin: 0 auto;
+    text-align: center;
+    
+    width: 100%;
+}
+
+</style>
+<div class="huazhou">
+	<div id='huazhou-l'></div>
+	<div id='huazhou-r'></div>												
+</div>
+<script>
+var str = '志向不过是记忆的奴隶，生气勃勃地降生，但却很难成长。 || 莎士比亚';
+var str ='今天会很残酷，明天会更残酷，后天会很美好，但大部分人会死在明天晚上。||马云';
+var arr=new Array();
+
+init_huazhou(str);
+
+function init_huazhou(str){
+	if(!str) str = '今天又是好日子,心想的事儿都能成!';
+	var i = 0;
+	var last_id = setInterval(function(){
+		if(str[i]){
+			var id = '#huazhou-l';
+			if(i > 18) id = '#huazhou-r';
+			$(id).append("<p>" + str[i] + "</p>");	
+		}else{
+			clearInterval(last_id); //结束事件
+		}
+		i++;
+	},300);
+	/* 循环第一种
+	for(var i in str){
+		//set_text(str[i]);
+    }
+	循环第二种
+	for(var i=0,len = str.length;i<len;i++){
+	set_text(str[i]);
+	 console.log(i)
+	}	
+	*/
+}
+
+/*
+var util={
+	setTimeout:function(fun, delay) {
+	    if(typeof fun == 'function'){
+	      var argu = Array.prototype.slice.call(arguments,2);
+	       var f = (function(){
+	      fun.apply(null, argu);
+	      }
+	    );
+	     return window.setTimeout(f, delay);
+	   }
+	   return window.setTimeout(fun,delay);
+	}
+}
+ window.onload=function(){
+       var a=[{id:1},{id:2},{id:3},{id:4}];
+       for(var i=0;i<3;i++){
+             util.setTimeout(start,1000,a[i]);
+       }
+} */
+/* window.onload=function(){
+    var a=[{id:1},{id:2},{id:3},{id:4}];
+    for(var i=0;i<3;i++){
+        setTimeout(function(){start(a[i])},1000);
+    }
+} */
+</script>

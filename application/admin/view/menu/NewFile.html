@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="index" method='post'>
+ name : <input type="text" name='name'><br/>
+ pwsd : <input type="text" name='pwd'><br/>
+<!-- 模板引入 -->
+{include file="/public/kind_editor" /}
+<input type="submit">
+</form>
+<script type="text/javascript">
+KindEditor.ready(function() {
+	Editor.html('HTML内容');	
+})
+</script>
+</body>
+</html>

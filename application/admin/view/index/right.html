@@ -1,0 +1,338 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+<body>
+<div class='right'>
+<h1>今日事,今日毕!</h1>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:300px"></div>
+
+<div class="user_inde">
+	<div class="user_inde_c" style="background-color:#27a9e3;">
+		<div class="user_inde_c1"><img src="http://www.daylog.com/tp5_blog/public/static/img/user_home.png"></div>
+		<div class="user_inde_c2"><br>管理员：<span>张三</span><br>职责岗位：<span>技术总监</span><br>权限等级：<span>超级权限</span></div>
+		<div class="user_inde_c3" style="background-color:#2195c9;">身份鉴别</div>
+	</div>
+	<div class="user_inde_c" style="background-color:#28b779;">
+		<div class="user_inde_c1"><img src="http://www.daylog.com/tp5_blog/public/static/img/user_list.png"></div>
+		<div class="user_inde_c2">
+		未处理：<span style='display:inline-block;' id="CAlertBalance_span">300</span>件<br>
+		事务处理：<span>1000</span>件<br>
+		在线时长：<span>2 小时 36 分</span><br>
+		预警手机号：<span id="CMobile_span"  style='display:inline-block;'>15076199201</span>
+		<input id="CMobile_input" onblur="submit_mobile(this.value);" type=text value='15076199201' style="border-style:none;display:none;margin-left:-5px;width:80px;height:20px ">
+		<span class="a3"><a  onclick="cheng_span(2);" >修改</a></span>
+	</div>
+    <div class="user_inde_c3" style="background-color:#17a668;">数据统计</div>
+   </div>
+	<div class="user_inde_c" style="background-color:#852b99;">
+		<div class="user_inde_c1"><img src="http://www.daylog.com/tp5_blog/public/static/img/user_service.png"></div>
+		<div class="user_inde_c2">
+			专属客服：<span>刘莎莎</span><br>
+			QQ号码：<span>685588001</span><br>
+			联系电话：<span>13688002264</span>
+		</div>
+		<div class="user_inde_c3" style="background-color:#741d88;">个人中心</div>
+	</div>
+	<div class="user_inde_c" style="background-color:#ffb848;margin-right:0;">
+		<div class="user_inde_c2" style="height:180px;padding-top:30px;">
+		  <ul class="user_inde_ul">
+		    <li>1、有将smsid值存入数据库，并且字段类型为int型的用户（请将字段类改为string,长度设为30）</li>
+		    <li>2、以WebSerice方式请求互亿无线短信接口的用户（请修改返回类型为string）</li>
+		    <li>3、您可以通过该接口测试地址来确认您是否调整完成：http://sms.ihuyi.com/webservice/sms.php</li>
+		  </ul>
+		</div>
+		<div class="user_inde_c3" style="background-color:#da9627;">公告信息</div>
+	</div>
+</div>
+
+<!-- 
+	<div id="app">
+		<el-row>
+		  <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
+		    <el-card :body-style="{ padding: '0px' }">
+		      <img src="http://element-cn.eleme.io/static/hamburger.50e4091.png" class="image">
+		      <div style="padding: 14px;">
+		        <span>好吃的汉堡</span>
+		        <div class="bottom clearfix">
+		          <time class="time">{{ currentDate }}</time>
+		          <el-button type="text" class="button">操作按钮</el-button>
+		        </div>
+		      </div>
+		    </el-card>
+		  </el-col>
+		</el-row>
+	</div>
+	
+ -->	
+</div>
+
+<div class="web_circle">
+ <img src="__STATIC__/Admin/index/img/t_2.png" class="circle">
+ <span>天 天<br/>日 记</span>
+</div>
+
+
+<!-- <link rel="stylesheet" type="text/css" href="http://www.17sucai.com/preview/410144/2015-09-16/53种loading加载/assets/style.css" />
+<link rel="stylesheet" type="text/css" href="http://www.17sucai.com/preview/410144/2015-09-16/53种loading加载/assets/loaders.css" />
+	  
+ <div class="item">
+	<div class="item-inner">
+		<div class="item-loader-container">
+			<div class="la-timer la-2x">
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div class="item-title"><a href="animations/timer.html">Timer<span>→</span></a></div>
+</div> -->
+
+<!-- <img alt="验证码"  title="换一张"  src="{$Think.__APP__}/UserCenter/getImg" id="img11" 
+onclick="document.getElementById('img11').src='{$Think.__APP__}/UserCenter/getImg/'+Math.random()" /> -->
+
+
+<!-- ECharts单文件引入 -->
+<script src="http://www.daylog.com/tp5_blog/public/static/js/build/dist/echarts.js"></script>
+<script type="text/javascript">
+var title= ['待处理','处理成功','处理超时','总处理量','好评率'];
+//var color = ['#fd1602','#fb695d','#fc8c82','#fc0160','#fc468b','#fd84b2','#02f0ff','#92f7fd','#baf7fb','#03fdf4','#fd8f01','#fcb85f','#fada02'];
+var color = ['#fd1602','#03fdf4','#fc8c82','#fd8f01','#fc468b','#fada02'];
+
+if(title.length==15){
+     color = ['#FF0000','#CC0800','#CC4100','#CC5100','#CC6100','#CC8100','#CC9100','#f69c00', '#4d8ef0','#f6be0e','#26b4fd',];     
+}
+
+var y_max=0;
+var data_obj = [];
+var url_arr = [];
+var x_name='';
+var jid = GetQueryString('jid');
+var sms = GetQueryString('sms');
+
+//线下
+url_arr['sec'] = 'http://192.168.0.8:20000/stats/sec';
+url_arr['min'] = 'http://192.168.0.8:20000/stats/min';
+url_arr['hour'] = 'http://192.168.0.8:20000/stats/hour'; 
+
+//得到url参数
+function GetQueryString(name)
+{
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	var r = window.location.search.substr(1).match(reg);
+	if(r!=null)return  unescape(r[2]); return null;
+}
+ 
+function get_chr_date(){
+	
+}
+ 
+function get_data(val){
+ var url='';
+ var axis_x_obj ='';
+ data_obj = [];
+ x_name='';
+ y_max=0;
+
+ if(val!=''){ url = url_arr[val]; }
+ if(url==''){ url = url_arr['sec'];  alert('未知错误执行默认设置'); }
+ if(val=='sec'){ x_name = '( 秒 )'; }
+ if(val=='min'){ x_name = '( 分 )'; }
+ if(val=='hour'){ x_name= '( 时 )'; }
+ 
+ var date = Ajax.ajax_url('get_date_api',{'url':url,'__token__':'{$Request.token}'},'post');
+ 
+ if(!date){alert('未知错误'); return; }
+ if(typeof date == "object"){
+	 var myObject = date;  //获得的数据
+ }else{
+	 var myObject = $.parseJSON(date);  //获得的数据
+ }
+ 
+ axis_x_obj = myObject['axis_x'].substr(0,myObject['axis_x'].length-1).split(','); //获得 轴对象
+ for (var i=0;i<title.length;i++){
+	var dat_obj = new Object();
+	val_obj = get_key_value(myObject,i,axis_x_obj);
+	get_value_max(val_obj);
+	dat_obj['name']= title[i];
+	dat_obj['type']= 'line';
+	dat_obj['smooth']= true;
+	dat_obj['data']= val_obj;
+	puth_obj(dat_obj);
+ }
+ if(y_max<10) { y_max = 50; }
+ set_data(axis_x_obj,title,data_obj,y_max);
+ 
+ /*
+ $.ajax({  
+		type: "get",  
+		url: 'get_date_api',   
+		data: {'url':url,'__token__':'{$Request.token}'},
+		async: true,
+		success: function(msg)
+			{
+			//alert(typeof(msg)+": "+msg);
+			if(!msg){alert('未知错误'); return; }
+			var myObject = $.parseJSON(msg);  //获得的数据
+			axis_x_obj = myObject['axis_x'].substr(0,myObject['axis_x'].length-1).split(','); //获得 轴对象
+			for (var i=0;i<title.length;i++)
+			{
+				var dat_obj = new Object();
+				val_obj = get_key_value(myObject,i,axis_x_obj);
+				get_value_max(val_obj);
+				dat_obj['name']= title[i];
+				dat_obj['type']= 'line';
+				dat_obj['smooth']= true;
+				dat_obj['data']= val_obj;
+				puth_obj(dat_obj);
+			}
+			if(y_max<10) { y_max = 50; }
+			set_data(axis_x_obj,title,data_obj,y_max);
+			}
+		}); 
+ */
+ 
+}
+ 
+function puth_obj(data){
+ 	data_obj.push(data);
+}
+ 
+// 获得数据最大值
+function get_value_max(val_obj){
+	var val =Math.max.apply(Math,val_obj);
+	if(val > y_max){
+	    y_max = val; 
+	}
+}
+/* 
+获得单个折线数据
+*/
+function get_key_value(data,key,axis_obj){ 
+ var str='';
+ var arr=[];
+ var val_str='';
+ for(var p in axis_obj)
+ {	//alert(data[axis_obj[p]]);
+	 for(var v in data[axis_obj[p]])
+	{	//alert(typeof(data[p])+' >> ' +p+' =>'+data[p] + "v: "+v) 
+		 if(v == key)
+		 {
+			 val_str += data[axis_obj[p]][key]+',';
+		}	 		
+	} 
+ }
+ return  val_str.substr(0,val_str.length-1).split(',');
+}
+
+/* 
+	set_data(axis_x,title,data) 折线展示
+	axis_x   x 轴
+ 	title    线标题
+ 	data    线数据
+*/ 
+function set_data(axis_x,title,data,y_max)
+{	//路径配置
+    require.config({
+        paths: {
+            echarts: 'http://www.daylog.com/tp5_blog/public/static/js/build/dist'
+        }
+    });
+    // 使用
+    require(
+        [
+            'echarts',
+            'echarts/chart/line', 
+            'echarts/chart/bar' 
+        ],
+        function (ec) {
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = ec.init(document.getElementById('main')); 
+            option = {
+            	    tooltip : {
+            	    	enterable:true,
+            	        trigger: 'axis',
+            	        axisPointer : {	
+            	            type : 'shadow' ,
+            	        },
+            	    },
+            	    legend: {
+            	    	x:'center',
+            	    	padding: 3,     
+            	    	itemGap: 1,     
+            	    	data : title   // 标题数据
+            	    },
+            	    toolbox: {   //这是辅助工具栏
+            	        show : true,//false 可以关闭
+            	        orient: 'vertical', 
+            	        feature : {
+            	            mark : {show: true},
+            	            dataView : {show: true, readOnly: false},
+            	            magicType : {show: true, type: ['tiled']},
+            	            restore : {show: true},
+            	            saveAsImage : {show: true},
+            	        }
+            	    },
+            	    calculable : true,
+            	    xAxis : [
+            	        {
+            	         name:x_name,
+            	         type : 'category',
+            	         boundaryGap : false,
+            	         data : axis_x,   //x 轴
+            	         axisLabel: {
+            	        	 rotate: 60,//60度角倾斜显示
+            	        	 interval:0       
+			            	          }
+            	        }
+            	    ],
+            	    grid: { 
+                        x: 80, 
+                        x2: 50,
+                        y2: 50,
+                    },
+            	    yAxis : [
+            	        {
+            	        	min:0,   
+            	        	max:y_max,	  
+            	        	splitNumber:8,
+            	            type : 'value',
+            	            name : '数值', 
+							axisLabel: {
+			            	    formatter: function (value, index) { 
+									return toThousands(value);
+									return value.toFixed(1);      
+			            	           }}
+			            }
+            	    ],
+		    		color : color,
+            	    series : data, //数据
+            	};
+            // 为echarts对象加载数据 
+             myChart.setOption(option,true);
+        }
+    );
+}
+
+
+function toThousands(num) {
+   var value = (num.toString()).indexOf("."), result = ''; 
+   if (value>0) { var num = (num.toString()).substr(0,value); }	
+  	
+   num = (num || 0).toString();
+   while (num.length > 3) {
+       result = ',' + num.slice(-3) + result;
+       num = num.slice(0, num.length - 3);
+   }
+   if (num) { result = num + result; }
+   return result;	 
+}
+
+var id='';
+window.onload=function(){
+	//setInterval(function(){get_data('sec')},10000)
+	get_data('sec'); 
+	//id = setInterval('getdata()',100000);			
+}    
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta content="telephone=no" name="format-detection">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<title>404</title>
+<link type="text/css" rel="stylesheet" href="./public/static/404/common.css">
+<script type="text/javascript" src="./public/static/404/jquery.min.js"></script>
+<script type="text/javascript" src="./public/static/404/md5.js"></script>
+<script type="text/javascript" src="./public/static/404/pay.js"></script>
+<style type="text/css">
+.page_error img {
+    display: block;
+    width: 325px;
+	max-width: 600px;
+    height: 116px;
+    margin: 30px auto;
+}
+
+</style>
+</head>
+<body>
+	<div class="header_wrap">
+		<div class="header">
+			<h1 class="logo"></h1>
+		</div>
+	</div>
+	<div class="main">
+		<div class="page_error">
+			<img src="./public/static/404/404.png">
+				<span style="display: none">
+				com.anzhi.pay.h5.exception.PayServiceException:
+				EC = 9019: MSG = 无效的appKey d:151799446743NwIAa0Vgs2gw0dhgod
+				</span>
+			<p>
+				很抱歉,你访问的页面出错了<br>工程师正在抢修中,请稍后重试
+			</p>
+			<a class="btn_01" href="javascript:void(0);" onclick="goToHome();">返回首页</a>
+		</div>
+	</div>
+	<div class="footer">
+		<p class="footer_spec">云笔记@www.daylog.cn</p>
+		<p>
+			非常抱歉非常抱歉非常抱歉非常抱歉非常抱歉非常抱歉
+		</p>
+	</div>
+</body>
+<script type="text/javascript">
+function goToHome(){
+	//window.location.href = document.referrer;
+	window.history.back(-1);
+}
+</script>
+</html>

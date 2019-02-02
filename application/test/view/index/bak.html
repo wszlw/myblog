@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>blog管理端</title>
+<link type="text/css" rel="stylesheet" href="__STATIC__/css/public.css"/>
+<link type="text/css" rel="stylesheet" href="__STATIC__/Index/index/css/head.css"/>
+
+<!-- js -->
+<script src="__STATIC__/js/jquery-1.8.0.min.js"></script>
+
+
+<!-- element 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- element 基础文件 -->
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<!-- element 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<style type="text/css">
+.el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    //min-height: 60px;
+  }
+  .row-bg {
+    //background-color: #f9fafc;
+  	//background-image: url(__STATIC__/img/index_back.jpg);
+  	background-image: url(__STATIC__/img/e9137a57d4fb1b02417eac246db7110f.jpg);
+  	background-image: url(__STATIC__/img/150e16baefa87ec65c121d33c4d7a62d.png);
+  	background-image: url(__STATIC__/img/20f8567f8dd5b0e9d2509cbff50fddaf.jpg);
+  	background-image: url(__STATIC__/img/e9137a57d4fb1b02417eac246db7110f.jpg);
+  	
+  	
+    //background: url(https://rescdn.qqmail.com/bizmail/zh_CN/htmledition/images/skin_48/top_bg264978.jpg) no-repeat right;
+  	//padding: 17px 20px 0;
+    //background: #036;
+  	 width:auto;
+	 height:auto;
+	 max-width:100%;
+	 max-height:100%;
+  	 min-height:80px;
+  	 background-size:100% auto;
+  }
+
+ .blog_logo{
+	-webkit-box-reflect: below -0.1em -webkit-linear-gradient(top, transparent, transparent 50%, rgba(0, 0, 0, 0.296875));
+ 	-webkit-box-reflect: below 1px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(250, 250, 250, 0.7)));
+ 	font-style:italic;
+ 	font-family:"STCaiyun","STXingkai";
+ 	//font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+ } 
+.az_mainnav {
+    height: 50px;
+    overflow: hidden;
+    //background: #fff;
+    //border-top: 1px solid #efefef;
+    //border-bottom: 1px solid #f6f6f6;
+}
+.az_mainnav li {
+    float: left;
+    width: 16%;
+    height: 50px;
+    line-height: 48px;
+    font-size: 18px;
+    //border-right: 1px solid #f6f6f6;
+    //color: #3e3e3e;
+}
+.az_mainnav a{
+	color:#FFF;
+}
+ul, li {
+    list-style: none;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+</style>
+
+</head>
+<body>
+<div class='head'>
+<div id="app">
+<el-row type="flex" class="row-bg">
+  <el-col :span="3"><div class="grid-content bg-purple"><h1 class='blog_logo'>天天云日记</h1></div></el-col>
+  <el-col :span="16"><div class="grid-content bg-purple-light">
+  	<div>
+ 		<ul class="az_mainnav">
+			<li><a href="/index.php">首页</a></li>
+			<li><a href="/recommend_1.html">应用</a></li>
+			<li class="current1"><a href="/recommend_2.html">游戏</a></li>
+			<li><a href="subject_1.html">专题</a></li>
+			<li><a href="/reading/reading.html">小说</a></li>
+			<li><a href="http://bbs.anzhi.com">论坛</a></li>
+		</ul>
+  	</div>
+  </div>	
+  </el-col>
+  <el-col :span="5"><div class="grid-content bg-purple"></div><p>2018年06月25日</p></el-col>
+</el-row>
+</div>
+
+
+<div id="app1">
+ <el-tabs type="border-card">
+  <el-tab-pane label="用户管理">用户管理</el-tab-pane>
+  <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+</el-tabs>
+</div>
+
+<script type="text/javascript">
+new Vue().$mount('#app')
+</script>
+</div>

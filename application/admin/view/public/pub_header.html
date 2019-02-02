@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- SEO搜索优化 -->
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta content="telephone=no" name="format-detection">
+	<meta name="keywords" content="关键字,云日记" />
+	<meta name="description" content="简介,云日记管理后台" />
+	<meta http-equiv="windows-Target" contect="_top">
+	
+	<title>云日记 [管理后台]</title>
+	<!-- 全局 js,css -->
+	<link type="text/css" rel="stylesheet" href="__STATIC__/css/public.css"/>
+	<script src="__STATIC__/js/jquery-1.8.0.min.js"></script>
+	<script src="__STATIC__/js/daylog.js"></script>
+
+	<!-- element 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<!-- element 基础文件 -->
+	<script src="//unpkg.com/vue/dist/vue.js"></script>
+	<!-- element 引入组件库 -->
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+{if $out.action eq 'left' }
+	<!-- 左侧边栏 (一)  -->
+	<link type="text/css" rel="stylesheet" href="/tp5_blog/public/static/Admin/index/css/left_{$out.cssid}.css"/>
+{elseif $out.action eq 'head' }
+	<!-- 头部样式     -->
+	<!-- 字体特效  -->
+	<script src="__STATIC__/js/TextiLlateJs/jquery.lettering.js"></script>
+	<script src="__STATIC__/js/TextiLlateJs/jquery.textillate.js"></script><!-- //(注意这几个文件最好放在最后面引入) --> 
+	<link type="text/css" rel="stylesheet" href="__STATIC__/js/TextiLlateJs/animate.css" />
+	<!-- 头部切换样式  -->
+	<link type="text/css" rel="stylesheet" href="__STATIC__/Admin/index/css/head_{$out.cssid}.css"/>
+{elseif $out.action eq 'right' }
+	<link type="text/css" rel="stylesheet" href="__STATIC__/Admin/index/css/right.css"/>
+{else/}	
+	<link type="text/css" rel="stylesheet" href="__STATIC__/Admin/index/css/right_public.css"/>
+{/if}
+	<!--效果文件  -->
+	<link type="text/css" rel="stylesheet" href="__STATIC__/js/iosOverlay.css"/>
+	<script src="__STATIC__/js/spin.min.js"></script>
+	<script src="__STATIC__/js/iosOverlay.js"></script>
+</head>

@@ -1,0 +1,273 @@
+<style>
+.wgt-common-nav {
+    height: 40px;
+    font-family: "Microsoft Yahei", 微软雅黑, arial, 宋体, sans-serif;
+    background: rgb(102, 102, 110);
+    margin: 13px auto 0px;
+}
+.wgt-common-nav .nav-wrap {
+    width: 980px;
+    margin: 0 auto;
+    position: relative;
+}
+.line, .clearfix, .clear {
+    *zoom: 1;
+}
+.clearfix {
+    zoom: 1;
+}
+.line:after, .clearfix:after, .clear:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+.clearfix:after {
+    clear: both;
+    content: '.';
+    display: block;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    height: 0;
+}
+.wgt-common-nav .share-exp-e {
+    float: right;
+    font-size: 16px;
+    width: 180px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    background: #51C83D;
+    text-decoration: none;
+}
+
+.wgt-common-nav ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+.wgt-common-nav .main-menu li.last {
+    background: url(//exp.bdstatic.com/static/common/widget/nav/img/line_d6714b4.png) no-repeat right 13px;
+}
+.wgt-common-nav .main-menu li {
+    position: relative;
+    float: left;
+    height: 40px;
+}
+.wgt-common-nav ul, ol, li {
+    list-style: none;
+}
+.wgt-common-nav .main-menu a:visited {
+    color: #fff;
+}
+.wgt-common-nav .main-menu a {
+    position: relative;
+    display: block;
+    outline: 0;
+    float: left;
+    color: #fff;
+    font-size: 16px;
+    height: 40px;
+    line-height: 42px;
+    _line-height: 44px\9;
+    overflow: hidden;
+    margin: 0 auto;
+    z-index: 1000;
+    zoom: 1;
+    padding: 0 40px 0 41px;
+    text-decoration: none;
+    background: url(//exp.bdstatic.com/static/common/widget/nav/img/line_d6714b4.png) no-repeat 0 13px;
+}
+a:link, a:visited {
+    color: #2d64b3;
+    text-decoration: none;
+}
+a:visited {
+    color: #2d64b3;
+    text-decoration: none;
+}
+.wgt-common-nav .main-menu .dir-icon {
+    background: url(//exp.bdstatic.com/static/common/widget/img-baidu-com/nav-share_0304ed8.png) no-repeat -190px -134px;
+    position: absolute;
+    top: 18px;
+    left: 78px;
+    width: 7px;
+    height: 4px;
+    _overflow: hidden;
+    cursor: pointer;
+    z-index: 1003;
+    display: inline-block;
+}
+.wgt-common-nav .sub-menu.sub-menu-category {
+    width: 230px;
+}
+.wgt-common-nav .sub-menu {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    _top: 42px\9;
+    width: 114px;
+    border: 0;
+    background: #E8E8EF;
+    background: rgba(232,232,239,.96);
+    z-index: 800;
+}
+.wgt-common-nav .sub-menu .sub-menu-items {
+    padding: 20px 0 23px;
+}
+.wgt-common-nav .sub-menu.sub-menu-category .sub-menu-item-box {
+    width: 50%;
+}
+.wgt-common-nav .sub-menu .sub-menu-item-box {
+    float: left;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.wgt-common-nav .main-menu li {
+    position: relative;
+    float: left;
+    height: 40px;
+}
+.wgt-common-nav .sub-menu.sub-menu-category .sub-menu-item-box.even .sub-menu-item {
+    left: -16px;
+}
+.wgt-common-nav .sub-menu.sub-menu-category .sub-menu-item {
+    left: 16px;
+}
+.wgt-common-nav .sub-menu .sub-menu-item:visited {
+    color: #666;
+}
+.wgt-common-nav .main-menu a:visited {
+    color: #fff;
+}
+.wgt-common-nav .sub-menu .sub-menu-item {
+    display: inline;
+    font-size: 14px;
+    height: 28px;
+    line-height: 28px;
+    color: #666;
+    padding-bottom: 1px;
+    text-decoration: none;
+    background: 0 0;
+    float: none;
+    padding: 0;
+}
+.wgt-common-nav .main-menu a {
+    position: relative;
+    display: block;
+    outline: 0;
+    float: left;
+    color: #fff;
+    font-size: 16px;
+    height: 40px;
+    line-height: 42px;
+    _line-height: 44px\9;
+    overflow: hidden;
+    margin: 0 auto;
+    z-index: 1000;
+    zoom: 1;
+    padding: 0 40px 0 41px;
+    text-decoration: none;
+    background: url(//exp.bdstatic.com/static/common/widget/nav/img/line_d6714b4.png) no-repeat 0 13px;
+}
+</style>
+<nav class="wgt-common-nav">
+	<div id="nav-wrap" class="nav-wrap clearfix">
+		<a href="http://jingyan.baidu.com/edit/content" target="_blank"
+			class="share-exp-e" id="share-exp-e" rel="nofollow"><i
+			class="share-exp-e-icon"></i>发布经验</a>
+		<ul class="main-menu clearfix" alog-group="main-menu">
+			<li class="main-menu-item"><a href="https://jingyan.baidu.com/"
+				log="type:2000,pos:common_menu,menu:1" target="_self">首页</a></li>
+			<li class="main-menu-item"><a href="javascript:void(0)"
+				log="type:2000,pos:common_menu,menu:7">分类</a><span id="dir-icon-e1"
+				class="dir-icon"></span>
+			<div class="sub-menu sub-menu-category" style="display: none;">
+					<ul class="sub-menu-items clearfix">
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/1"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">美食/营养</a></li>
+						<li class="sub-menu-item-box even"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/10"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">游戏/数码</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/37"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">手工/爱好</a></li>
+						<li class="sub-menu-item-box even"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/50"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">生活/家居</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/73"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">健康/养生</a></li>
+						<li class="sub-menu-item-box even"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/86"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">运动/户外</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/93"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">职场/理财</a></li>
+						<li class="sub-menu-item-box even"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/101"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">情感/交际</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/108"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">母婴/教育</a></li>
+						<li class="sub-menu-item-box even"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/list/123"
+							log="type:2000,pos:common_menu,menu:7" target="_blank">时尚/美容</a></li>
+					</ul>
+				</div></li>
+			<li class="main-menu-item"><a
+				href="https://jingyan.baidu.com/task" target="_blank"
+				log="type:2000,pos:common_menu,menu:3" rel="nofollow"
+				id="all-task-a-e">任务</a><span id="dir-icon-e2" class="dir-icon"></span>
+			<div class="sub-menu" style="display: none;">
+					<ul class="sub-menu-items clearfix">
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/patch" target="_blank">悬赏令</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/task" target="_blank">任务书</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							href="https://jingyan.baidu.com/usersign" target="_blank"
+							log="type:2000,pos:common_menu,menu:8">签到</a></li>
+					</ul>
+				</div></li>
+			<li class="main-menu-item"><a
+				href="https://jingyan.baidu.com/user/income" target="_blank"
+				log="type:2000,pos:common_menu,menu:6" rel="nofollow">回享</a><i
+				class="new-icon"></i></li>
+			<li class="main-menu-item"><a
+				href="https://jingyan.baidu.com/shop"
+				log="type:2000,pos:common_menu,menu:9" target="_blank">商城</a></li>
+			<li class="main-menu-item"><a
+				href="http://jingyan.baidu.com/videoexp/list/0" target="_blank"
+				log="type:2000,pos:common_menu,menu:11" rel="nofollow">特色</a><span
+				id="dir-icon-e3" class="dir-icon"></span>
+			<div class="sub-menu" style="display: none;">
+					<ul class="sub-menu-items clearfix">
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							log="type:2000,pos:common_menu,menu:11"
+							href="http://jingyan.baidu.com/videoexp/list/0" target="_blank">视频经验</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							log="type:2000,pos:common_menu,menu:10"
+							href="https://jingyan.baidu.com/fancier/list/0" target="_blank">发烧友</a></li>
+						<li class="sub-menu-item-box"><a class="sub-menu-item"
+							log="type:2000,pos:common_menu,menu:2"
+							href="https://jingyan.baidu.com/magazine/home" target="_blank">杂志</a></li>
+					</ul>
+				</div></li>
+			<li class="main-menu-item last"><a class="last"
+				href="http://zhidao.baidu.com/"
+				log="type:2000,pos:common_menu,menu:10" target="_blank">知道</a></li>
+		</ul>
+	</div>
+</nav>

@@ -1,0 +1,32 @@
+<!--在线编辑器  -->
+<link rel="stylesheet" href="__STATIC__/js/kindeditor-4.1.11-zh-CN/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/js/kindeditor-4.1.11-zh-CN/plugins/code/prettify.css" />
+<script charset="utf-8" src="__STATIC__/js/kindeditor-4.1.11-zh-CN/kindeditor-all.js"></script>
+<script charset="utf-8" src="__STATIC__/js/kindeditor-4.1.11-zh-CN/lang/zh-CN.js"></script>
+<script charset="utf-8" src="__STATIC__/js/kindeditor-4.1.11-zh-CN/plugins/code/prettify.js"></script>
+
+<textarea id='editor_id' name='editor_val' rows="6" cols="20"></textarea>
+
+<script type="text/javascript">
+KindEditor.ready(function(K) {
+	//var editor1 = K.create('textarea[name="content1"]', {
+	Editor = K.create('#editor_id', {	
+		cssPath : '../plugins/code/prettify.css',
+		uploadJson : '../php/upload_json.php',
+		fileManagerJson : '../php/file_manager_json.php',
+		allowFileManager : true,
+		afterCreate : function() {
+			var self = this;
+			K.ctrl(document, 13, function() {
+				self.sync();
+				K('form[name=example]')[0].submit();
+			});
+			K.ctrl(self.edit.doc, 13, function() {
+				self.sync();
+				K('form[name=example]')[0].submit();
+			});
+		}
+	});
+	prettyPrint();
+});
+</script>

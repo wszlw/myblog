@@ -1,0 +1,115 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+
+<body>
+<div id="app">
+<el-form action="index" method='post' :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  <el-input v-model="ruleForm.fid" :disabled="true" type='hidden'></el-input>
+  <el-form-item label="父节点名称" prop="fname">
+    <el-input v-model="ruleForm.fname" :disabled="true"></el-input>
+  </el-form-item>
+  <el-form-item label="节点名称" prop="name">
+    <el-input v-model="ruleForm.name"></el-input>
+  </el-form-item>
+  <el-form-item label="节点URl" prop="url">
+    <el-input v-model="ruleForm.url"></el-input>
+  </el-form-item>
+  <!-- 只有根目录需要添加目录样式  -->
+  {if @$menu.fid eq 0}
+  <el-form-item label="节点CSS" prop="css">
+    <el-input v-model="ruleForm.css"></el-input>
+  </el-form-item>
+  {/if}
+  <el-form-item label="节点权限" prop="quanxian">
+    <el-checkbox-group v-model="ruleForm.quanxian">
+      <el-checkbox label="1" name="quanxian">新增</el-checkbox>
+      <el-checkbox label="2" name="quanxian">删除</el-checkbox>
+      <el-checkbox label="3" name="quanxian">修改</el-checkbox>
+      <el-checkbox label="4" name="quanxian">查询</el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  
+  <el-form-item label="即时配送" prop="delivery">
+    <el-switch v-model="ruleForm.delivery"></el-switch>
+  </el-form-item>
+
+  <el-form-item label="节点备注" prop="desc">
+    <el-input type="textarea" autosize v-model="ruleForm.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+    <el-button @click="resetForm('ruleForm')">重置</el-button>
+  </el-form-item>
+</el-form>
+</div>
+
+<script type="text/javascript">
+var Main = {
+   /* 数据层 */ 	
+   data() {
+     return {
+       ruleForm: {
+         fname: '{$menu.name}',
+         fid :'{$menu.id}',
+         name:'',
+         url:'',
+         desc: '',
+         quanxian: ['1','2'],
+         css:'',
+       },
+       rules: {
+         name: [
+           		{ required: true, message: '请输入活动名称', trigger: 'blur' },
+           		{ min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' }
+         	],
+         url: [
+                { required: true, message: '请输入节点 URL 路径', trigger: 'blur' },
+           	],
+         quanxian: [
+               { type: 'array', required: true, message: '请至少选择一个权限性质', trigger: 'change' }
+            ],
+       }
+     };
+   },
+   /*方法层  */
+   methods: {
+     submitForm(formName) {
+       this.$refs[formName].validate((valid) => {
+         if (valid) {
+        	var toUrl = _app + '/Menu/add_menu_do';
+        	var data = this.$refs[formName].model;
+        	var value = Ajax.ajax_url(toUrl,data,'POST','','');
+        	value = JSON.parse(value);
+        	
+        	//调用通知方法在Main初始时被注入
+        	//this.notice('失败','新节点添加失败','error');
+        	window.parent.Element_Obj.notice(value.title, value.msg, value.type);
+        	if(value.state == 200 || value.state == 300){
+    			//提交成功后调用父的关闭方法
+    			window.parent.D_ifram.close_span();
+        	}
+        	
+         } else {
+           console.log('error submit!!');
+           return false;
+         }
+       });
+     },
+     resetForm(formName) {
+       this.$refs[formName].resetFields();
+     },
+   },
+   /* 渲染层  */
+   mounted() {	   
+	   //this.notice('成功啦啦啦','操作成功','success');//挂载时及执行的 类似于 onload
+   }
+}
+var Ctor = Vue.extend(Element_Main_init(Main));
+//var Ctor = Vue.extend(Main);
+new Ctor().$mount('#app');
+
+
+</script>
+
+</body>
+</html>

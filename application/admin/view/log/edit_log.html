@@ -1,0 +1,158 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+<!--在线编辑器  -->
+<link rel="stylesheet" href="__STATIC__/js/kindeditor-4.1.11-zh-CN/themes/default/default.css" />
+<link rel="stylesheet" href="__STATIC__/js/kindeditor-4.1.11-zh-CN/plugins/code/prettify.css" />
+<script charset="utf-8" src="__STATIC__/js/kindeditor-4.1.11-zh-CN/kindeditor-all.js"></script>
+<script charset="utf-8" src="__STATIC__/js/kindeditor-4.1.11-zh-CN/lang/zh-CN.js"></script>
+<script charset="utf-8" src="__STATIC__/js/kindeditor-4.1.11-zh-CN/plugins/code/prettify.js"></script>
+<body>
+
+<!-- 模板引入 -->
+{//include file="/public/pub_loading" /}
+<div id="app">
+<el-form action="index" method='post' :model="def_Form" :rules="rules" ref="def_Form" label-width="100px" class="demo-def_Form">
+  <el-input v-model="def_Form.token" :disabled="true" type='hidden' value='{:token()}'></el-input>
+  <el-input v-model="def_Form.id" :disabled="true" type='hidden'></el-input>
+  <el-form-item label="文章标题" prop="title">
+    <el-input v-model="def_Form.title" placeholder="请输入标题"></el-input>
+  </el-form-item>
+  <el-form-item label="文章作者" prop="uname">
+    <el-input v-model="def_Form.uname" :disabled="true" placeholder="请输入作者"></el-input>
+  </el-form-item>
+  
+  <el-form-item label="发布时间" >
+    <el-col :span="6">
+      <el-date-picker type="date" placeholder="选择日期" v-model="def_Form.day" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="1" style='text-align:center;'>-</el-col>
+    <el-col :span="6">
+      <el-time-picker type="fixed-time" placeholder="选择时间" v-model="def_Form.time" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+
+  <el-form-item label="文章分类" prop="type">
+    <el-checkbox-group v-model="def_Form.type" :min="1" :max="4" @change="typeChange()">
+    	<el-checkbox v-for="(item,index) in logType" :label="item.id" :key="index">{{item.name}}</el-checkbox>
+  	</el-checkbox-group>
+  </el-form-item>
+  
+  <el-form-item label="允许品论" prop="ispl">
+    <el-switch v-model="def_Form.ispl" :active-value="1" :inactive-value="0" active-text='启用'  inactive-text='禁用'></el-switch>
+  </el-form-item>
+  <el-form-item label="反链URL" prop="doc">
+    <el-input v-model="def_Form.doc" :disabled="true"></el-input>
+  </el-form-item>
+  <el-form-item label="文章正文">
+  	<el-input id='editor_id' type="textarea":rows="2"placeholder="请输入内容" v-model="def_Form.content">
+   </el-form-item>
+
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('def_Form')">立即发布</el-button>
+    <el-button @click="resetForm('def_Form')">重置</el-button>
+  </el-form-item>  
+</el-form>
+</div>
+
+
+<script type="text/javascript">
+
+KindEditor.ready(function(K) { 
+	Editor = K.create('#editor_id', {allowImageUpload:false,resizeType : 1,width:"90%",height:"200px"}); 
+	//Editor.html('');	
+	});
+
+const typeOptions = [{id:1,name:'上海'},{id:2,name:'北京'},{id:3,name:'广州'},{id:4,name:'河北'}]; 
+var Main = {
+	/* 数据层 */ 	
+   data() {
+	return {
+	def_Form: {
+		 __token__ :'{$Request.token}',
+		 id:{$result.id},
+		 doc: 'www.daylog.cn',
+         title:'{$result.title}',
+         content:'{$result.content}',
+         type: [1,4],
+         uname:"{$out.admin.name}",
+         ispl:{$result.ispl},
+         day:{$result.atime} * 1000,
+         time:{$result.atime} * 1000,
+       },
+       rules: {
+    	title: [
+           		{ required: true, message: '请日志标题名称', trigger: 'blur' },
+           		{ min: 2, max: 100, message: '长度在 2 到 100 个字符', trigger: 'blur' }
+         	],
+       },
+       logType:{$log_type}
+     };
+   },
+   /*方法层  */
+   methods: {
+     submitForm(formName) {
+       this.OpenLoading();	 
+       this.$refs[formName].validate((valid) => {
+         if (valid) { //valid 返回表单验证的结果
+        	var data = this.$refs[formName].model;
+        	var toUrl = _app + '/log/add_log_do/id/'+ data.id;
+        	
+        	data.content = Editor.html();
+        	if(!data.content){
+        		this.notice('错误','文章内容为空', 400); return;
+        	}
+        	
+        	if(data.day){
+        		data.day = this.getNewTime(2, (new Date(data.day)) );
+        	}else{
+        		data.day = this.getNewTime(2);
+        	}
+
+        	if(data.time){
+        		data.time = this.getNewTime(3,(new Date(data.time)) );
+        	}else{
+        		data.time = this.getNewTime(3);
+        	}
+
+        	//插入数据
+        	data.time = this.getNewTime(0,new Date(data.day +' '+ data.time));
+
+        	Ajax.is_log = true;
+        	
+        	var value = Ajax.ajax_url(toUrl,data,'POST','');
+        	//var token= xhr.getResponseHeader("token");
+        	
+        	this.notice(value.title,value.msg, value.code );//执行提示
+        	if(value.code != 200){
+        		this.$refs[formName].model.__token__ = value.__token__;
+        	}else{ 
+        		window.parent.window_Ctor.notice(value.title,value.msg, value.code );//执行提示
+        		window.parent.window_Ctor.dialogVisible = false; //关闭父级页面的的 dialog
+        	}
+        	
+         }
+         return false;
+       });
+     },
+     resetForm(formName) {
+       this.$refs[formName].resetFields();
+       Editor.html('');
+     },
+     typeChange(){
+    	 log("checkbox 改变事件");
+     },
+   },
+   /* 渲染层  */
+   mounted() {	   
+	   //this.notice('成功啦啦啦','操作成功','success');//挂载时及执行的 类似于 onload
+	   //this.loading();
+	   this.OpenLoading();
+   }
+}
+
+
+var Ctor = Vue.extend(Element_Main_init(Main));
+new Ctor().$mount('#app');
+</script>
+</body>
+</html>

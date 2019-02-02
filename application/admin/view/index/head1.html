@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>blog管理端</title>
+<!-- 全局 js,css -->
+<link type="text/css" rel="stylesheet" href="__STATIC__/css/public.css"/>
+<script src="__STATIC__/js/jquery-1.8.0.min.js"></script>
+<script src="__STATIC__/js/daylog.js"></script>
+
+<!-- element 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!-- element 基础文件 -->
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<!-- element 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<!-- 字体特效  -->
+<script src="__STATIC__/js/TextiLlateJs/jquery.lettering.js"></script>
+<script src="__STATIC__/js/TextiLlateJs/jquery.textillate.js"></script><!-- //(注意这几个文件最好放在最后面引入) --> 
+<link type="text/css" rel="stylesheet" href="__STATIC__/js/TextiLlateJs/animate.css" />
+<!-- 字体特效  -->
+
+<link type="text/css" rel="stylesheet" href="__STATIC__/Admin/index/css/head_{$out.cssid}.css"/>
+</head>
+<body>
+<div class='head'>
+<div id="app">
+<el-row type="flex" class="row-bg">
+  <el-col :span="3"><div class="grid-content bg-purple"><a href='{$Think.__APP__}index'><h1 class='blog_logo'>天天云日记</h1></a></div></el-col>
+  <el-col :span="16"><div class="grid-content bg-purple-light">
+  	<div>
+ 		<ul class="head_ul">
+			<!-- <li id='1' class='select'><a href="{$Think.__APP__}left/typeid/1">首页</a></li> -->
+			{foreach name="type" item="val" key="k" }
+				{if $k eq 0 }
+				<li id="{$val['id']}" class='select'><a href="javascript:;">{$val['name']}</a></li>
+				{else /}
+				<li id="{$val['id']}"><a href="javascript:;">{$val['name']}</a></li>	
+				{/if}
+			{/foreach}
+			
+		</ul>
+  	</div>
+  </div>	
+  </el-col>
+  <el-col :span="5">
+   <div id="top_menu">
+	  <div class="head_user">
+		 <div class="clock">
+			<span id="Date">2018</span>	
+			<span id="hours">00</span>
+			<span id="point">:</span>
+			<span id="min">00</span>
+			<span id="point">:</span>
+			<span id="sec">00</span>
+		</div>
+		<div id="head_user_i">
+			<span>欢迎我的主人: admin</span> 
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-time"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-date"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-message"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-setting"></i></a>
+			<a href="javascript:;" onclick="open_menu();" title='打开系统菜单'><i class="el-icon-menu"></i></a>
+		</div>
+	  </div>
+	  <div class="head_user_hidden hidden_css">
+	  	 <div id="head_user_i">
+			<a href="javascript:;" onclick="open_menu();" title='关闭系统菜单'><i class="el-icon-back"></i></a>
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-edit"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-upload"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-download"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-refresh"></i></a>
+			
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-delete"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-star-on"></i></a>
+			<a href="javascript:;"   onclick="change_subject();"  title='换个主题' target="main"><i class="el-icon-sort"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-mobile-phone"></i></a>
+			
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-search"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-share"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-service"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-tickets"></i></a>
+			
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-rank"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-picture"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-info"></i></a>
+			
+		</div>
+	  	
+	  </div>	
+	
+	  <div class="hidden_css"><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531809302&di=94536cc7bcef887113bb6f1a14c76d75&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a0d4582d8320a84a0e282be8a02e.jpg'> </div>
+	  <div class="hidden_css"><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531214783587&di=16937a01c580fafe2fb7834c38fb2574&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0100b75542f6780000019ae990db31.jpg%402o.jpg'></div>
+	  <div class="hidden_css"><img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531214840578&di=e44982af47f338331d5cb8e52a0bcbd8&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F015e0e57220cea6ac725381292e17e.png%401280w_1l_2o_100sh.png'></div>	
+   </div>  
+ </el-col>
+</el-row>
+
+</div>
+
+ 
+<script type="text/javascript">
+new Vue().$mount('#app')
+
+<!-- 字体特效  -->
+$(function(){
+ // 动画效果
+ $('.grid-content h1').textillate({
+    loop: true,
+    autoStart: true,
+    in: {
+    shuffle: false,
+    effect: 'bounce'},
+    out: {
+    effect: 'hinge',
+    delayScale: 1.5,
+    delay: 30,
+    sync: false,
+    shuffle: true,
+    reverse: false,
+    callback: function () {}
+  }
+ });
+});
+
+
+
+</script>
+</div>

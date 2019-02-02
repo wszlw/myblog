@@ -1,0 +1,48 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+
+<body>
+<div class='left'>
+	<div class="container">
+
+	<div class="leftsidebar_box">
+		<div class="line"></div>
+		
+		{foreach name="list" item="val" key="k" }
+		 <dl class="{$val[0]['css']}">
+			{foreach name="val" item="val2" key="k2" }
+			{if $k2 eq 0 }
+			<dt>{$val2.name}<img src="/tp5_blog/public/static/Index/index/img/select_xl01.png"></dt>
+			{else /}
+			<dd><a href="{$Think.__APP__}{$val2['url']}" target="main">{$val2.names}</a></dd>
+			{/if}
+			{/foreach}
+		</dl>
+		{/foreach}
+		
+	</div>
+
+</div>
+	
+<!-- <div><a href=''><span onclick="alert('close');" class='close'></span></a></div> -->
+</div>
+<script type="text/javascript">
+$(".leftsidebar_box dt").css({"background-color":"#3992d0"});
+$(".leftsidebar_box dt img").attr("src","/tp5_blog/public/static/Index/index/img/select_xl01.png");
+$(function(){
+	$(".leftsidebar_box dd").hide();
+	$(".leftsidebar_box dt").click(function(){
+		$(".leftsidebar_box dt").css({"background-color":"#3992d0"})
+		$(this).css({"background-color": "#317eb4"});
+		$(this).parent().find('dd').removeClass("menu_chioce");
+		$(".leftsidebar_box dt img").attr("src","/tp5_blog/public/static/Index/index/img/select_xl01.png");
+		$(this).parent().find('img').attr("src","/tp5_blog/public/static/Index/index/img/select_xl.png");
+		$(".menu_chioce").slideUp(); 
+		$(this).parent().find('dd').slideToggle();
+		$(this).parent().find('dd').addClass("menu_chioce");
+	});
+})
+</script>
+
+</body>
+</html>

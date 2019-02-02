@@ -1,0 +1,43 @@
+<script type="text/javascript" src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
+<div id='daylog_time' style="width:260px" ></div>
+<!-- <script type="text/javascript" src="http://www.daylog.com/tp5_blog/extend/Calendar/Calendar.js"></script> -->
+
+
+<script type="text/javascript">
+setTimeout(function(){
+	get_Calendar($('#daylog_time'));
+}, 1000);
+/**
+ * 
+ */
+ 
+function get_Calendar(obj,data={},Callback=''){
+	if(typeof(obj)=='undefined') return false;
+	
+	data['__token__'] = '{$Request.token}';
+	
+	var res = '',async = false;
+	$.ajax({
+    	url:'/js_api.php?Calendar_api',    		//请求的url地址
+	    //dataType:dataType,  //返回格式为json
+	    async:async,	    //请求是否异步，默认为异步，这也是ajax重要特性
+	    data:data,    		//参数值,键值对
+	    type:"POST",   		//请求方式
+	    success:function(req){
+	    	if(req){ obj.html(req); }
+	    	console.log(async);
+	    }
+	});
+}
+
+function loadBlogCalendar(name){
+	var nameArr = ['Last_month','Next_month'];
+	
+	var y = parseInt($('.Calendar_year').val());
+	var m = parseInt($('.Calendar_month').val());
+	
+	if(name == 'Last_month') m = m-1; else if(name == 'Next_month') m = m+1;
+	get_Calendar($("#calendar"),{'y':y,'m':m,'type':2});	
+}
+</script>

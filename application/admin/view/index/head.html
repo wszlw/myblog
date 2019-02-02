@@ -1,0 +1,109 @@
+<!-- 模板引入 -->
+{include file="/public/pub_header" /}
+<body>
+<div class='head'>
+<div id="app">
+<el-row type="flex" class="row-bg">
+  <el-col :span="3"><div class="grid-content bg-purple"><a href='{$Think.__APP__}index'><h1 class='blog_logo'>天天云日记</h1></a></div></el-col>
+  <el-col :span="16"><div class="grid-content bg-purple-light">
+  	<div>
+ 		<ul class="head_ul">
+			<!-- <li id='1' class='select'><a href="{$Think.__APP__}left/typeid/1">首页</a></li> -->
+			{foreach name="type" item="val" key="k" }
+				{if $k eq 0 }
+				<li id="{$val['id']}" class='select'><a href="javascript:;">{$val['name']}</a></li>
+				{else /}
+				<li id="{$val['id']}"><a href="javascript:;">{$val['name']}</a></li>	
+				{/if}
+			{/foreach}
+			
+		</ul>
+  	</div>
+  </div>	
+  </el-col>
+  <el-col :span="5">
+   <div id="top_menu">
+   	  <div class="hidden_css">
+	  	<div class='up_down'>☝</div>
+	  	<div class='up_down'>☟</div>
+	  </div>
+	  <div class="head_user">
+		<div class="clock">
+			<span id="Date">2018</span>	
+			<span id="hours">00</span>
+			<span id="point">:</span>
+			<span id="min">00</span>
+			<span id="point">:</span>
+			<span id="sec">00</span>
+		</div>
+		<div id="head_user_i">
+			<span>您好管理员: {$admin.name}</span> 
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-time"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-date"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-message"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-setting"></i></a>
+			<a href="javascript:;" onclick="open_menu();" title='打开系统菜单'><i class="el-icon-menu"></i></a>
+		</div>
+	  </div>
+	  <div class="head_user_hidden hidden_css">
+	  	 <div id="head_user_i">
+			<a href="javascript:;" onclick="open_menu();" title='关闭系统菜单'><i class="el-icon-back"></i></a>
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-edit"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-upload"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-download"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-refresh"></i></a>
+			
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-delete"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-star-on"></i></a>
+			<a href="javascript:;"   onclick="change_subject();"  title='换个主题' target="main"><i class="el-icon-sort"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-mobile-phone"></i></a>
+			
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-search"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-share"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-service"></i></a>
+			<a href="{$Think.__APP__}Header/system"  title='系统设置' target="main"><i class="el-icon-tickets"></i></a>
+			
+			<a href="{$Think.__APP__}Header/setTimeout"  title='定时任务' target="main"><i class="el-icon-rank"></i></a>
+			<a href="{$Think.__APP__}Header/schedule"  title='日程计划' target="main"><i class="el-icon-picture"></i></a>
+			<a href="{$Think.__APP__}Header/mailbox"  title='邮箱' target="main"><i class="el-icon-info"></i></a>
+			
+		</div>
+	  	
+	  </div>	
+	<!-- 
+	  <div class="hidden_css">空</div>
+	  <div class="hidden_css">空</div>
+	  <div class="hidden_css">空</div> -->
+   </div>  
+ </el-col>
+</el-row>
+
+</div>
+
+
+ 
+<script type="text/javascript">
+new Vue().$mount('#app')
+
+<!-- 字体特效  -->
+$(function(){
+ // 动画效果
+ $('.grid-content h1').textillate({
+    loop: true,
+    autoStart: true,
+    in: {
+    shuffle: false,
+    effect: 'bounce'},
+    out: {
+    effect: 'hinge',
+    delayScale: 1.5,
+    delay: 30,
+    sync: false,
+    shuffle: true,
+    reverse: false,
+    callback: function () {}
+  }
+ });
+});
+</script>
+</div>
